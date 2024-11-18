@@ -3,3 +3,5 @@ plugins {
 }
 rootProject.name = "springg"
 include("module-batch")
+include("module-api")
+include("module-common")

@@ -1,4 +1,5 @@
 plugins {
+	java
 	kotlin("jvm") version "1.9.25"
 	kotlin("plugin.spring") version "1.9.25" apply false
 	id("org.springframework.boot") version "3.3.5" apply false
@@ -10,33 +11,27 @@ allprojects {
 	group = "com.exciting"
 	version = "0.0.1-SNAPSHOT"
 
-	java {
-		toolchain {
-			languageVersion = JavaLanguageVersion.of(21)
-		}
-	}
-
-	configurations {
-		compileOnly {
-			extendsFrom(configurations.annotationProcessor.get())
-		}
-	}
-
 	repositories {
 		mavenCentral()
 	}
 
-	kotlin {
-		compilerOptions {
-			freeCompilerArgs.addAll("-Xjsr305=strict")
-		}
-	}
-
-	allOpen {
-		annotation("jakarta.persistence.Entity")
-		annotation("jakarta.persistence.MappedSuperclass")
-		annotation("jakarta.persistence.Embeddable")
-	}
+//	java {
+//		toolchain {
+//			languageVersion = JavaLanguageVersion.of(21)
+//		}
+//	}
+//
+//	configurations {
+//		compileOnly {
+//			extendsFrom(configurations.annotationProcessor.get())
+//		}
+//	}
+//
+//	kotlin {
+//		compilerOptions {
+//			freeCompilerArgs.addAll("-Xjsr305=strict")
+//		}
+//	}
 
 	tasks.withType<Test> {
 		useJUnitPlatform()
@@ -44,9 +39,19 @@ allprojects {
 }
 
 subprojects {
+	apply(plugin = "org.springframework.boot")
+	apply(plugin = "kotlin")
+	apply(plugin = "kotlin-kapt")
+
 	dependencies {
-		// lombok
+		implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+		implementation("org.jetbrains.kotlin:kotlin-reflect")
+//		implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+		testImplementation("org.springframework.boot:spring-boot-starter-test")
 		compileOnly("org.projectlombok:lombok")
 		annotationProcessor("org.projectlombok:lombok")
+
+		implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+		implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	}
 }
