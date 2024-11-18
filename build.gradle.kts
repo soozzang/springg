@@ -24,6 +24,8 @@ subprojects {
 //		implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 		implementation("org.jetbrains.kotlin:kotlin-reflect")
 		implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+		compileOnly("org.projectlombok:lombok")
+		annotationProcessor("org.projectlombok:lombok")
 //		implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 //		implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	}
