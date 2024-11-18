@@ -16,7 +16,6 @@ allprojects {
 }
 
 subprojects {
-	apply(plugin = "org.springframework.boot")
 	apply(plugin = "kotlin")
 	apply(plugin = "kotlin-kapt")
 	apply(plugin = "org.jetbrains.kotlin.jvm")
